@@ -57,13 +57,16 @@
     <Compile Include="HashCodeHelper.cs" />
     <Compile Include="InputParser.cs" />
     <Compile Include="InputParserTests.cs" />
-    <Compile Include="PolicyDefinitions.cs" />
+    <Compile Include="PolicyDefinitionFiles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="PolicyDefinitionFiles.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="sample.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -78,6 +81,13 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.9.0\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>xsd.exe /classes /language:CS $(ProjectDir)PolicyDefinitionFiles.xsd</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

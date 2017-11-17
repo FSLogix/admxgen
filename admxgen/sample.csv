@@ -1,2 +1,6 @@
-"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Possible Values","Supported On"
-"Profile Containers","Enabled","Machine","checkBox","Controls whether or not the Profiles feature is active.","Software\Policies\FSLogix\ODFC","Enabled","","FSLogix Office 365 Containers 2.5"
+"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
+"FSLogix\Profile Containers","Enabled","Machine","checkBox","Controls whether or not the Profiles feature is active.","Software\FSLogix\Profiles","Enabled","FSLogix Profiles 2.5",""
+"FSLogix\Profile Containers","VHD Location","Machine","textBox","Specifies the network location where the VHD(X) files are stored. For example, \\servername\share\containers.","Software\FSLogix\Profiles","VHDLocations","FSLogix Profiles 2.5",""
+"FSLogix\Profile Containers\Container and Directory Naming","Swap directory name components","Machine","checkBox","When checked causes new containing directories to be named with the user name first followed by the SID.","Software\FSLogix\Profiles","FlipFlopProfileDirectoryName","FSLogix Profiles 2.5",""
+"FSLogix\Office 365 Containers","Enabled","Machine","checkBox","Controls whether or not the Profiles feature is active.","Software\Policies\FSLogix\ODFC","Enabled","FSLogix Office 365 Containers 2.5",""
+"FSLogix\Office 365 Containers","VHD Location","Machine","textBox","Specifies the network location where the VHD(X) files are stored. For example, \\servername\share\containers.","Software\Policies\FSLogix\ODFC","VHDLocations","FSLogix Office 365 Containers 2.5",""
