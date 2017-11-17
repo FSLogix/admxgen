@@ -1,0 +1,2 @@
+"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Possible Values","Supported On"
+"Profile Containers","Enabled","Machine","checkBox","Controls whether or not the Profiles feature is active.","Software\Policies\FSLogix\ODFC","Enabled","","FSLogix Office 365 Containers 2.5"
