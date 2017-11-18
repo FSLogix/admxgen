@@ -66,6 +66,12 @@ namespace admxgen
             return new BooleanElement { id = policyId, key = key, valueName = valueName, trueValue = new Value { Item = new ValueDecimal { value = 1 } }, falseValue = new Value { Item = new ValueDecimal { value = 0 } } };
         }
 
+        private DecimalElement GetDecimalElement(string policyId, string key, string valueName, uint minValue, uint maxValue)
+        {
+
+            return new DecimalElement { id = policyId, key = key, valueName = valueName, minValue = minValue, maxValue = maxValue, required = true };
+        }
+
         private string GetRef(string type, string resourceId)
         {
             return $"$({type}.{resourceId})";
@@ -142,43 +148,50 @@ namespace admxgen
             var supportedOn = csvReader["Supported On"];
             var properties = csvReader["Properties"];
 
-            var displayNameStringResourceId = GetResourceId("DisplayName", displayName);
-            AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = displayNameStringResourceId, Value = displayName });
-            var displayNameStringRef = GetStringRef(displayNameStringResourceId);
-
-            var explainTextStringResourceId = GetResourceId("Explain", explanation);
-            AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = explainTextStringResourceId, Value = explanation });
-            var explainTextStringRef = GetStringRef(explainTextStringResourceId);
-
-            var policyId = GetResourceId("Policy", category, displayName);
-
-            var propertiesDictionary = properties.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
-               .Select(part => part.Split('='))
-               .ToDictionary(split => split[0], split => split[1]);
-            
-            // If no label provided, use the policy display name
-            if (!propertiesDictionary.Any(d => d.Key == "Label"))
+            try
             {
-                propertiesDictionary.Add("Label", displayName);
+                var displayNameStringResourceId = GetResourceId("DisplayName", displayName);
+                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = displayNameStringResourceId, Value = displayName });
+                var displayNameStringRef = GetStringRef(displayNameStringResourceId);
+
+                var explainTextStringResourceId = GetResourceId("Explain", explanation);
+                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = explainTextStringResourceId, Value = explanation });
+                var explainTextStringRef = GetStringRef(explainTextStringResourceId);
+
+                var policyId = GetResourceId("Policy", category, displayName);
+
+                var propertiesDictionary = properties.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                   .Select(part => part.Split('='))
+                   .ToDictionary(split => split[0], split => split[1]);
+
+                // If no label provided, use the policy display name
+                if (!propertiesDictionary.Any(d => d.Key == "Label"))
+                {
+                    propertiesDictionary.Add("Label", displayName);
+                }
+
+                var parseTypeResults = ParseType(policyId, type, registryKey, valueName, propertiesDictionary);
+                AddUniqueArrayItem(c => Resources.resources.presentationTable.presentation = c, Resources.resources.presentationTable.presentation, parseTypeResults.Presentation);
+                var presentationStringRef = GetRef("presentation", parseTypeResults.Presentation.id);
+
+                var policy = new PolicyDefinition
+                {
+                    name = policyId,
+                    parentCategory = new CategoryReference { @ref = ParseCategory(category) },
+                    displayName = displayNameStringRef,
+                    @class = (PolicyClass)Enum.Parse(typeof(PolicyClass), @class),
+                    explainText = explainTextStringRef,
+                    key = registryKey,
+                    supportedOn = new SupportedOnReference { @ref = ParseSupportedOn(supportedOn) },
+                    elements = parseTypeResults.Elements,
+                    presentation = presentationStringRef
+                };
+                AddUniqueArrayItem(c => Definitions.policies.policy = c, Definitions.policies.policy, policy);
             }
-
-            var parseTypeResults = ParseType(policyId, type, registryKey, valueName, propertiesDictionary);
-            AddUniqueArrayItem(c => Resources.resources.presentationTable.presentation = c, Resources.resources.presentationTable.presentation, parseTypeResults.Presentation);
-            var presentationStringRef = GetRef("presentation", parseTypeResults.Presentation.id);
-
-            var policy = new PolicyDefinition
+            catch (Exception ex)
             {
-                name = policyId,
-                parentCategory = new CategoryReference { @ref = ParseCategory(category) },
-                displayName = displayNameStringRef,
-                @class = (PolicyClass)Enum.Parse(typeof(PolicyClass), @class),
-                explainText = explainTextStringRef,
-                key = registryKey,
-                supportedOn = new SupportedOnReference { @ref = ParseSupportedOn(supportedOn) },
-                elements = parseTypeResults.Elements,
-                presentation = presentationStringRef
-            };
-            AddUniqueArrayItem(c => Definitions.policies.policy = c, Definitions.policies.policy, policy);
+                throw new Exception($"Error parsing {category}\\{displayName}", ex);
+            }
         }
 
         private string ParseSupportedOn(string supportedOn)
@@ -197,6 +210,11 @@ namespace admxgen
             var result = new ParseTypeResult();
             switch (type)
             {
+                case "enum":
+                    Console.WriteLine("WARN: unexpected policy type 'enum'");
+                    result.Elements = new List<object> { GetBooleanElement(policyId, key, valueName) }.ToArray();
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new CheckBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
+                    break;
                 case "checkBox":
                     result.Elements = new List<object>{ GetBooleanElement(policyId, key, valueName) }.ToArray();
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new CheckBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
@@ -206,6 +224,14 @@ namespace admxgen
                     string defaultValue;
                     properties.TryGetValue("Default", out defaultValue);
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new TextBox { refId = policyId, label = properties["Label"], defaultValue = defaultValue } }.ToArray() };
+                    break;
+                case "decimal":
+                    string minValue;
+                    properties.TryGetValue("MinValue", out minValue);
+                    string maxValue;
+                    properties.TryGetValue("MinValue", out maxValue);
+                    result.Elements = new List<object> { GetDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) }.ToArray();
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new DecimalTextBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("valueName", "Unexpected policy type");
