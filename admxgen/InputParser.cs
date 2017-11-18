@@ -10,6 +10,7 @@ namespace admxgen
     class InputParser
     {
         private TextReader _reader;
+        private const int MAX_ID_LENGTH = 96;
 
         public PolicyDefinitions Definitions { get; } = new PolicyDefinitions
         {
@@ -78,7 +79,7 @@ namespace admxgen
             {
                 result += rgx.Replace(s, "_") + "_";
             }
-            return result;
+            return result.Length > MAX_ID_LENGTH ? result.Substring(0, MAX_ID_LENGTH) : result;
         }
 
         private string GetStringRef(string resourceId)
