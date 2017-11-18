@@ -113,10 +113,12 @@ namespace admxgen
         private string ParseCategory(string category)
         {
             string lastCategoryId = string.Empty;
+            string fullCatName = string.Empty;
             foreach (var cat in category.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                var categoryStringResourceId = GetResourceId("Cat", cat);
-                var categoryId = GetResourceId("Cat", cat);
+                fullCatName += string.IsNullOrEmpty(fullCatName) ? cat : "\\" + cat;
+                var categoryStringResourceId = GetResourceId("Cat", fullCatName);
+                var categoryId = GetResourceId("Cat", fullCatName);
 
                 AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = categoryStringResourceId, Value = cat });
                 var theNewCategory = new Category
