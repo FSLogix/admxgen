@@ -3,14 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace admxgen
 {
     class InputParser
     {
+        private enum EnumerationElementType { Decimal, @String };
+
+        private struct ParseTypeResult
+        {
+            public object[] Elements;
+            public PolicyPresentation Presentation;
+        }
+
         private TextReader _reader;
         private const int MAX_ID_LENGTH = 96;
+        private MD5 _md5 = MD5.Create();
 
         public PolicyDefinitions Definitions { get; } = new PolicyDefinitions
         {
@@ -61,15 +72,54 @@ namespace admxgen
             setCollection(mutableCollection.ToArray());
         }
 
-        BooleanElement GetBooleanElement(string policyId, string key, string valueName)
+        BooleanElement CreateBooleanElement(string policyId, string key, string valueName)
         {
             return new BooleanElement { id = policyId, key = key, valueName = valueName, trueValue = new Value { Item = new ValueDecimal { value = 1 } }, falseValue = new Value { Item = new ValueDecimal { value = 0 } } };
         }
 
-        private DecimalElement GetDecimalElement(string policyId, string key, string valueName, uint minValue, uint maxValue)
+        private DecimalElement CreateDecimalElement(string policyId, string key, string valueName, uint minValue, uint maxValue)
         {
 
             return new DecimalElement { id = policyId, key = key, valueName = valueName, minValue = minValue, maxValue = maxValue, required = true };
+        }
+
+        private object CreateEnumElement(string policyId, string key, string valueName, EnumerationElementType type, IDictionary<string, uint> valuesList)
+        {
+            var element = new EnumerationElement
+            {
+                id = policyId,
+                key = key,
+                valueName = valueName
+            };
+
+            var itemList = new List<EnumerationElementItem>();
+            foreach (var val in valuesList)
+            {
+                if (type == EnumerationElementType.Decimal)
+                {
+                    var enumStringResourceId = GetResourceId("Enum", policyId, val.Key);
+                    AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = enumStringResourceId, Value = val.Key });
+                    itemList.Add(new EnumerationElementItem { displayName = GetStringRef(enumStringResourceId), value = new Value { Item = new ValueDecimal { value = val.Value } } });
+                }
+                else if (type == EnumerationElementType.String)
+                {
+                    var enumStringResourceId = GetResourceId("Enum", policyId, val.Key);
+                    AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = enumStringResourceId, Value = val.Key });
+                    itemList.Add(new EnumerationElementItem { displayName = GetStringRef(enumStringResourceId), value = new Value { Item = val.Key } });
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("type", "Unexpected enumeration element type");
+                }
+            }
+            element.item = itemList.ToArray();
+
+            return element;
+        }
+
+        TextElement CreateTextElement(string policyId, string key, string valueName)
+        {
+            return new TextElement { id = policyId, key = key, valueName = valueName, required = true };
         }
 
         private string GetRef(string type, string resourceId)
@@ -79,23 +129,18 @@ namespace admxgen
 
         private string GetResourceId(params string[] ss)
         {
-            var result = string.Empty;
-            Regex rgx = new Regex("[^a-zA-Z0-9]");
-            foreach (var s in ss)
+            byte[] data = _md5.ComputeHash(Encoding.UTF8.GetBytes(string.Concat(ss)));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
             {
-                result += rgx.Replace(s, "_") + "_";
+                sBuilder.Append(data[i].ToString("x2"));
             }
-            return result.Length > MAX_ID_LENGTH ? result.Substring(0, MAX_ID_LENGTH) : result;
+            return sBuilder.ToString();
         }
 
         private string GetStringRef(string resourceId)
         {
             return GetRef("string", resourceId);
-        }
-
-        TextElement GetTextElement(string policyId, string key, string valueName)
-        {
-            return new TextElement { id = policyId, key = key, valueName = valueName, required = true };
         }
 
         public void Parse()
@@ -213,16 +258,22 @@ namespace admxgen
             switch (type)
             {
                 case "enum":
-                    Console.WriteLine("WARN: unexpected policy type 'enum'");
-                    result.Elements = new List<object> { GetBooleanElement(policyId, key, valueName) }.ToArray();
-                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new CheckBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
+                    var enumerationElementType = (EnumerationElementType)Enum.Parse(typeof(EnumerationElementType), properties["Type"]);
+                    var valuesList = new Dictionary<string, uint>();
+                    foreach (var v in properties["Values"].Split(new[] { '|' }))
+                    {
+                        var vv = v.Split(new[] { ':' });
+                        valuesList.Add(vv[0], vv.Length > 1 ? uint.Parse(vv[1]) : 0);
+                    }
+                    result.Elements = new List<object> { CreateEnumElement(policyId, key, valueName, enumerationElementType, valuesList) }.ToArray();
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new DropdownList { refId = policyId } }.ToArray() };
                     break;
                 case "checkBox":
-                    result.Elements = new List<object>{ GetBooleanElement(policyId, key, valueName) }.ToArray();
+                    result.Elements = new List<object>{ CreateBooleanElement(policyId, key, valueName) }.ToArray();
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new CheckBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
                     break;
                 case "textBox":
-                    result.Elements = new List<object> { GetTextElement(policyId, key, valueName) }.ToArray();
+                    result.Elements = new List<object> { CreateTextElement(policyId, key, valueName) }.ToArray();
                     string defaultValue;
                     properties.TryGetValue("Default", out defaultValue);
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new TextBox { refId = policyId, label = properties["Label"], defaultValue = defaultValue } }.ToArray() };
@@ -232,19 +283,13 @@ namespace admxgen
                     properties.TryGetValue("MinValue", out minValue);
                     string maxValue;
                     properties.TryGetValue("MinValue", out maxValue);
-                    result.Elements = new List<object> { GetDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) }.ToArray();
+                    result.Elements = new List<object> { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) }.ToArray();
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new DecimalTextBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("valueName", "Unexpected policy type");
             }
             return result;
-        }
-
-        private struct ParseTypeResult
-        {
-            public object[] Elements;
-            public PolicyPresentation Presentation;
         }
     }
 }
