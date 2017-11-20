@@ -10,14 +10,14 @@ namespace admxgen
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             try
             {
                 if (args.Length < 2)
                 {
                     Console.WriteLine("Usage: admxgen [input_file] [output_filename]");
-                    return;
+                    return 1;
                 }
 
                 var parser = new InputParser(new StreamReader(args[0]));
@@ -57,10 +57,13 @@ namespace admxgen
                     var ser = new XmlSerializer(parser.Resources.GetType(), "http://www.microsoft.com/GroupPolicy/PolicyDefinitions");
                     ser.Serialize(w, parser.Resources);
                 }
+
+                return 0;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return 1;
             }
         }
     }
