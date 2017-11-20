@@ -265,26 +265,26 @@ namespace admxgen
                         var vv = v.Split(new[] { ':' });
                         valuesList.Add(vv[0], vv.Length > 1 ? uint.Parse(vv[1]) : 0);
                     }
-                    result.Elements = new List<object> { CreateEnumElement(policyId, key, valueName, enumerationElementType, valuesList) }.ToArray();
-                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new DropdownList { refId = policyId } }.ToArray() };
+                    result.Elements = new object[] { CreateEnumElement(policyId, key, valueName, enumerationElementType, valuesList) };
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DropdownList { refId = policyId } } };
                     break;
                 case "checkBox":
-                    result.Elements = new List<object>{ CreateBooleanElement(policyId, key, valueName) }.ToArray();
-                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new CheckBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
+                    result.Elements = new object[] { CreateBooleanElement(policyId, key, valueName) };
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new CheckBox { refId = policyId, Value = properties["Label"] } } };
                     break;
                 case "textBox":
-                    result.Elements = new List<object> { CreateTextElement(policyId, key, valueName) }.ToArray();
+                    result.Elements = new object[] { CreateTextElement(policyId, key, valueName) };
                     string defaultValue;
                     properties.TryGetValue("Default", out defaultValue);
-                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new TextBox { refId = policyId, label = properties["Label"], defaultValue = defaultValue } }.ToArray() };
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new TextBox { refId = policyId, label = properties["Label"], defaultValue = defaultValue } } };
                     break;
                 case "decimal":
                     string minValue;
                     properties.TryGetValue("MinValue", out minValue);
                     string maxValue;
                     properties.TryGetValue("MinValue", out maxValue);
-                    result.Elements = new List<object> { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) }.ToArray();
-                    result.Presentation = new PolicyPresentation { id = policyId, Items = new List<object> { new DecimalTextBox { refId = policyId, Value = properties["Label"] } }.ToArray() };
+                    result.Elements = new object[] { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) };
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DecimalTextBox { refId = policyId, Value = properties["Label"] } } };
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("valueName", "Unexpected policy type");
