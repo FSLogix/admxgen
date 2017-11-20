@@ -20,6 +20,7 @@ namespace admxgen
                     return 1;
                 }
 
+                Console.WriteLine($"Generating from {args[0]}");
                 var parser = new InputParser(new StreamReader(args[0]));
                 parser.Parse();
 
@@ -46,12 +47,14 @@ namespace admxgen
                     Encoding = Encoding.UTF8
                 };
 
+                Console.WriteLine($"Writing output {args[1]}.admx");
                 using (var w = XmlWriter.Create(new StreamWriter($"{args[1]}.admx"), xmlWriterSettings))
                 {
                     var ser = new XmlSerializer(parser.Definitions.GetType(), "http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions");
                     ser.Serialize(w, parser.Definitions);
                 }
 
+                Console.WriteLine($"Writing output {args[1]}.adml");
                 using (var w = XmlWriter.Create(new StreamWriter($"{args[1]}.adml"), xmlWriterSettings))
                 {
                     var ser = new XmlSerializer(parser.Resources.GetType(), "http://www.microsoft.com/GroupPolicy/PolicyDefinitions");

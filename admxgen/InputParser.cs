@@ -282,7 +282,7 @@ namespace admxgen
                     string minValue;
                     properties.TryGetValue("MinValue", out minValue);
                     string maxValue;
-                    properties.TryGetValue("MinValue", out maxValue);
+                    properties.TryGetValue("MaxValue", out maxValue);
                     result.Elements = new object[] { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) };
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DecimalTextBox { refId = policyId, Value = properties["Label"] } } };
                     break;
