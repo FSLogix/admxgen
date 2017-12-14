@@ -5,6 +5,9 @@ platform: Any CPU
 configuration: Release
 image: Visual Studio 2017
 
+before_build:
+  - nuget restore
+
 build:
   project: admxgen.sln
 
