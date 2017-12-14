@@ -8,11 +8,17 @@ namespace admxgen_tests
 {
     class AcceptanceTests
     {
-        public bool FilesAreSame(string filename1, string filename2)
+        public void AssertFilesAreSame(string filename1, string filename2)
         {
-            var contents1 = File.ReadAllText(filename1);
-            var contents2 = File.ReadAllText(filename2);
-            return contents1.Equals(contents2);
+            var contents1 = File.ReadAllLines(filename1);
+            var contents2 = File.ReadAllLines(filename2);
+
+            Assert.That(contents1.Length, Is.EqualTo(contents2.Length));
+
+            for (int i = 0; i < contents1.Length; ++i)
+            {
+                Assert.That(contents1[i], Is.EqualTo(contents2[i]), "Files differ on line {0}", i);
+            }
         }
 
         [TestCase("test-data\\t1.csv", "test-data\\t1-expected")]
@@ -31,8 +37,8 @@ namespace admxgen_tests
             Assert.That(p.ExitCode, Is.EqualTo(0));
 
             // Compare
-            Assert.That(FilesAreSame(expectedOutput + ".admx", "actual.admx"));
-            Assert.That(FilesAreSame(expectedOutput + ".adml", "actual.adml"));
+            AssertFilesAreSame(expectedOutput + ".admx", "actual.admx");
+            AssertFilesAreSame(expectedOutput + ".adml", "actual.adml");
         }
     }
 }
