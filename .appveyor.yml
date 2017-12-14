@@ -6,7 +6,6 @@ configuration: Release
 image: Visual Studio 2017
 
 install:
-  - echo Restoring Nuget packages
   - nuget restore admxgen.sln
 
 build:
