@@ -11,6 +11,11 @@ install:
 build:
   project: admxgen.sln
 
+test:
+  assemblies:
+    only:
+      - '**\*-tests.dll'
+
 deploy: off
 
 notifications:
