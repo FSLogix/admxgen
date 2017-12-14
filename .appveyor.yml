@@ -5,7 +5,7 @@ platform: Any CPU
 configuration: Release
 image: Visual Studio 2017
 
-before_build:
+install:
   - nuget restore
 
 build:
