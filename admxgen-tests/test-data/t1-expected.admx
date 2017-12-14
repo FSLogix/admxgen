@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="FSLogix" namespace="FSLogix.Policies" />
+  </policyNamespaces>
+  <supersededAdm fileName="fslogixODFC2.2.adm" />
+  <supersededAdm fileName="fslogixODFC2.5.adm" />
+  <resources minRequiredRevision="1.0" />
+  <supportedOn>
+    <definitions>
+      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="044bea4c9582a4bf13aef79d11a968a3" displayName="$(string.044bea4c9582a4bf13aef79d11a968a3)" />
+  </categories>
+  <policies>
+    <policy name="a34caee91acc604ca6e103d17c3fc4ed" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.fbc286ab87756b963ee61dfc6dc3649d)" presentation="$(presentation.a34caee91acc604ca6e103d17c3fc4ed)" key="Software\Company\CheckBox">
+      <parentCategory ref="044bea4c9582a4bf13aef79d11a968a3" />
+      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+      <elements>
+        <boolean id="a34caee91acc604ca6e103d17c3fc4ed" key="Software\Company\CheckBox" valueName="CheckBoxValueName">
+          <trueValue>
+            <decimal value="1" />
+          </trueValue>
+          <falseValue>
+            <decimal value="0" />
+          </falseValue>
+        </boolean>
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

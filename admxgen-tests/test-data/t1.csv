@@ -1,0 +1,2 @@
+"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
+"CheckBoxSetting","Enabled","Machine","checkBox","Description of check box setting.","Software\Company\CheckBox","CheckBoxValueName","",""

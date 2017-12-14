@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace admxgen
 {
-    class InputParser
+    public class InputParser
     {
         private enum EnumerationElementType { Decimal, @String };
 
