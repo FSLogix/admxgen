@@ -1,0 +1,17 @@
+{
+
+  "DisplayName": "Display Name",
+  "Description": "Description",
+  "Revision": "6.6",
+  "MinRequiredRevision": "6.6",
+  "SchemaVersion": "8.8",
+  "TargetNamespace.Prefix": {
+    "Prefix": "NamespacePrefix",
+    "Namespace": "NamespacePrefix.Namespace"
+  },
+  "FallbackCulture": "en-US",
+  "SupersededAdm": [
+    "superseded.adm"
+  ],
+  "File": "textBoxTest.ini"
+}

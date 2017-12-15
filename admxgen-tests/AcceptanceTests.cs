@@ -22,10 +22,10 @@ namespace admxgen_tests
             }
         }
 
-        [TestCase("test-data\\checkBoxTest.csv", "test-data\\checkBoxTest")]
-        [TestCase("test-data\\textBoxTest.csv", "test-data\\textBoxTest")]
-        [TestCase("test-data\\enumTest.csv", "test-data\\enumTest")]
-        [TestCase("test-data\\decimalTest.csv", "test-data\\decimalTest")]
+        [TestCase("test-data\\checkBoxTest.json", "test-data\\checkBoxTest")]
+        [TestCase("test-data\\textBoxTest.json", "test-data\\textBoxTest")]
+        [TestCase("test-data\\enumTest.json", "test-data\\enumTest")]
+        [TestCase("test-data\\decimalTest.json", "test-data\\decimalTest")]
         public void InputFileGeneratesCorrectOutputFile(string input, string outputPrefix)
         {
             var testdir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

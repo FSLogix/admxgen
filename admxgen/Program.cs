@@ -21,6 +21,7 @@ namespace admxgen
                 }
 
                 Console.WriteLine($"Generating from {args[0]}");
+
                 var parser = new InputParser(new StreamReader(args[0]));
                 parser.Parse();
 

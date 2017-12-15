@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
-  <displayName>FSLogix</displayName>
-  <description>FSLogix Configuration</description>
+<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="6.6" schemaVersion="8.8" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Display Name</displayName>
+  <description>Description</description>
   <resources>
     <stringTable>
       <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
