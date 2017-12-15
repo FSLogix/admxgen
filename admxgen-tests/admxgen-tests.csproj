@@ -51,13 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="test-data\t1-expected.adml">
+    <None Include="test-data\checkBoxTest-expected.adml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="test-data\t1-expected.admx">
+    <None Include="test-data\checkBoxTest-expected.admx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="test-data\t1.csv">
+    <None Include="test-data\checkBoxTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

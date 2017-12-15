@@ -66,7 +66,7 @@ namespace admxgen
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                return 1;
+                return e.HResult;
             }
         }
     }

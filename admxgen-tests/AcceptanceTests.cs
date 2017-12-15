@@ -21,7 +21,7 @@ namespace admxgen_tests
             }
         }
 
-        [TestCase("test-data\\t1.csv", "test-data\\t1-expected")]
+        [TestCase("test-data\\checkBoxTest.csv", "test-data\\checkBoxTest-expected")]
         public void InputFileGeneratesCorrectOutputFile(string input, string expectedOutput)
         {
             var testdir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
