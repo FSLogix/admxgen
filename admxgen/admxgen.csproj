@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashCalculator.cs" />
     <Compile Include="HashCodeHelper.cs" />
     <Compile Include="InputParser.cs" />
     <Compile Include="PolicyDefinitionFiles.cs" />

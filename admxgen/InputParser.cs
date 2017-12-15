@@ -21,7 +21,7 @@ namespace admxgen
 
         private TextReader _reader;
         private const int MAX_ID_LENGTH = 96;
-        private MD5 _md5 = MD5.Create();
+        private HashCalculator _hashCalculator = new HashCalculator();
 
         public PolicyDefinitions Definitions { get; } = new PolicyDefinitions
         {
@@ -129,13 +129,7 @@ namespace admxgen
 
         private string GetResourceId(params string[] ss)
         {
-            byte[] data = _md5.ComputeHash(Encoding.UTF8.GetBytes(string.Concat(ss)));
-            StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
-            return sBuilder.ToString();
+            return _hashCalculator.GetStringHash(string.Concat(ss));
         }
 
         private string GetStringRef(string resourceId)
