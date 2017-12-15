@@ -9,7 +9,9 @@ install:
   - nuget restore admxgen.sln
 
 build:
+  parallel: true
   project: admxgen.sln
+  verbosity: minimal
 
 test:
   assemblies:
