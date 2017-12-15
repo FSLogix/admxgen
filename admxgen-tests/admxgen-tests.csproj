@@ -60,7 +60,7 @@
     <None Include="test-data\checkBoxTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="test-data\checkBoxTest.ini">
+    <None Include="test-data\checkBoxTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="test-data\decimalTest-expected.adml">
@@ -72,7 +72,7 @@
     <None Include="test-data\decimalTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="test-data\decimalTest.ini">
+    <None Include="test-data\decimalTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="test-data\enumTest-expected.adml">
@@ -84,7 +84,7 @@
     <None Include="test-data\enumTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="test-data\enumTest.ini">
+    <None Include="test-data\enumTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="test-data\textBoxTest-expected.adml">
@@ -96,7 +96,7 @@
     <None Include="test-data\textBoxTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="test-data\textBoxTest.ini">
+    <None Include="test-data\textBoxTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,13 +1,33 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace admxgen
 {
+    public class TargetNamespace
+    {
+        public string Prefix { get; set; }
+        public string Namespace { get; set; }
+    }
+
+    public class AdmxSettings
+    {
+        public string DisplayName { get; set; }
+        public string Description { get; set; }
+        public string Revision { get; set; }
+        public string MinRequiredRevision { get; set; }
+        public TargetNamespace TargetNamespace { get; set; }
+        public string SchemaVersion { get; set; }
+        public string FallbackCulture { get; set; }
+        public List<string> SupersededPolicyFiles { get; set; }
+        public string File { get; set; }
+    }
+
     class Program
     {
         static int Main(string[] args)
@@ -21,26 +41,23 @@ namespace admxgen
                 }
 
                 Console.WriteLine($"Generating from {args[0]}");
+                var admxSettings = JsonConvert.DeserializeObject<AdmxSettings>(File.ReadAllText(args[0]));
 
-                var parser = new InputParser(new StreamReader(args[0]));
+                var parser = new InputParser(new StreamReader(admxSettings.File));
                 parser.Parse();
 
-                parser.Definitions.revision = "1.0";
-                parser.Definitions.schemaVersion = "1.0";
-                parser.Definitions.policyNamespaces.target.prefix = "FSLogix";
-                parser.Definitions.policyNamespaces.target.@namespace = "FSLogix.Policies";
-                parser.Definitions.resources.minRequiredRevision = "1.0";
-                parser.Definitions.resources.fallbackCulture = "en-US";
-                parser.Definitions.supersededAdm = new List<FileReference>
-                {
-                    new FileReference { fileName = "fslogixODFC2.2.adm" },
-                    new FileReference { fileName = "fslogixODFC2.5.adm" }
-                }.ToArray();
+                parser.Definitions.revision = admxSettings.Revision;
+                parser.Definitions.schemaVersion = admxSettings.SchemaVersion;
+                parser.Definitions.policyNamespaces.target.prefix = admxSettings.TargetNamespace.Prefix;
+                parser.Definitions.policyNamespaces.target.@namespace = admxSettings.TargetNamespace.Namespace;
+                parser.Definitions.resources.minRequiredRevision = admxSettings.MinRequiredRevision;
+                parser.Definitions.resources.fallbackCulture = admxSettings.FallbackCulture;
+                parser.Definitions.supersededAdm = admxSettings.SupersededPolicyFiles.Select(s => new FileReference { fileName = s }).ToArray();
 
-                parser.Resources.revision = "1.0";
-                parser.Resources.schemaVersion = "1.0";
-                parser.Resources.displayName = "FSLogix";
-                parser.Resources.description = "FSLogix Configuration";
+                parser.Resources.revision = admxSettings.Revision;
+                parser.Resources.schemaVersion = admxSettings.SchemaVersion;
+                parser.Resources.displayName = admxSettings.DisplayName;
+                parser.Resources.description = admxSettings.Description;
 
                 var xmlWriterSettings = new XmlWriterSettings
                 {

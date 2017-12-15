@@ -1,17 +1,16 @@
 {
-
   "DisplayName": "Display Name",
   "Description": "Description",
   "Revision": "6.6",
   "MinRequiredRevision": "6.6",
   "SchemaVersion": "8.8",
-  "TargetNamespace.Prefix": {
+  "TargetNamespace": {
     "Prefix": "NamespacePrefix",
-    "Namespace": "NamespacePrefix.Namespace"
+    "Namespace": "NamespacePrefix.Policies"
   },
   "FallbackCulture": "en-US",
-  "SupersededAdm": [
+  "SupersededPolicyFiles": [
     "superseded.adm"
   ],
-  "File": "decimalTest.ini"
+  "File": "decimalTest.csv"
 }
