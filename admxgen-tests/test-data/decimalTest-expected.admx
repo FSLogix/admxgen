@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="FSLogix" namespace="FSLogix.Policies" />
+  </policyNamespaces>
+  <supersededAdm fileName="fslogixODFC2.2.adm" />
+  <supersededAdm fileName="fslogixODFC2.5.adm" />
+  <resources minRequiredRevision="1.0" />
+  <supportedOn>
+    <definitions>
+      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="0333b61d59f22f5233632f158693d626" displayName="$(string.0333b61d59f22f5233632f158693d626)" />
+  </categories>
+  <policies>
+    <policy name="0262e6c081f1ee5645a3fd71022cba1a" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.8ac88d137b3ba9132700b072685fb7dd)" presentation="$(presentation.0262e6c081f1ee5645a3fd71022cba1a)" key="Software\Company\Decimal">
+      <parentCategory ref="0333b61d59f22f5233632f158693d626" />
+      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+      <elements>
+        <decimal id="0262e6c081f1ee5645a3fd71022cba1a" key="Software\Company\Decimal" valueName="DecimalValueName" required="true" maxValue="10" />
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

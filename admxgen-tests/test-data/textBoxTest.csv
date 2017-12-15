@@ -1,0 +1,2 @@
+"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
+"TextBoxSetting","Enabled","Machine","textBox","Description of text box setting.","Software\Company\TextBox","TextBoxValueName","",""

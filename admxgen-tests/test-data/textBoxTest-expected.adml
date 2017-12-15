@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>FSLogix</displayName>
+  <description>FSLogix Configuration</description>
+  <resources>
+    <stringTable>
+      <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
+      <string id="26952c7bf6f7958020e5a7bba4a34ad4">Description of text box setting.</string>
+      <string id="ff3955f84347b76eb014fc78530677c1">TextBoxSetting</string>
+      <string id="eb7d3a9e1c2bd85c48f19c3e04977831"></string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="d002c965ab60d35668cd0b143bbe489b">
+        <textBox refId="d002c965ab60d35668cd0b143bbe489b">
+          <label>Enabled</label>
+        </textBox>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

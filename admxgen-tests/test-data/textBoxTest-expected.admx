@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="FSLogix" namespace="FSLogix.Policies" />
+  </policyNamespaces>
+  <supersededAdm fileName="fslogixODFC2.2.adm" />
+  <supersededAdm fileName="fslogixODFC2.5.adm" />
+  <resources minRequiredRevision="1.0" />
+  <supportedOn>
+    <definitions>
+      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="ff3955f84347b76eb014fc78530677c1" displayName="$(string.ff3955f84347b76eb014fc78530677c1)" />
+  </categories>
+  <policies>
+    <policy name="d002c965ab60d35668cd0b143bbe489b" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.26952c7bf6f7958020e5a7bba4a34ad4)" presentation="$(presentation.d002c965ab60d35668cd0b143bbe489b)" key="Software\Company\TextBox">
+      <parentCategory ref="ff3955f84347b76eb014fc78530677c1" />
+      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+      <elements>
+        <text id="d002c965ab60d35668cd0b143bbe489b" key="Software\Company\TextBox" valueName="TextBoxValueName" required="true" />
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

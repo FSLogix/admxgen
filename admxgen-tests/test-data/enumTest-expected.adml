@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>FSLogix</displayName>
+  <description>FSLogix Configuration</description>
+  <resources>
+    <stringTable>
+      <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
+      <string id="4ce83d0827e61e45cb62fccb3e42c189">Description of enum setting.</string>
+      <string id="f2feebbc6dfcb6f6930dd9ed87a925dd">Option A</string>
+      <string id="aa80f1e3a17dfca37730cbc9c8befd2f">Option B</string>
+      <string id="33aa3d63bc1c502fda4005e218bf2169">EnumSetting</string>
+      <string id="eb7d3a9e1c2bd85c48f19c3e04977831"></string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="3473fb5c4c49f6885bbdf458aebe4d1d">
+        <dropdownList refId="3473fb5c4c49f6885bbdf458aebe4d1d" />
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

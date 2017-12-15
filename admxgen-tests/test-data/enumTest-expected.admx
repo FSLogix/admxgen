@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="FSLogix" namespace="FSLogix.Policies" />
+  </policyNamespaces>
+  <supersededAdm fileName="fslogixODFC2.2.adm" />
+  <supersededAdm fileName="fslogixODFC2.5.adm" />
+  <resources minRequiredRevision="1.0" />
+  <supportedOn>
+    <definitions>
+      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="33aa3d63bc1c502fda4005e218bf2169" displayName="$(string.33aa3d63bc1c502fda4005e218bf2169)" />
+  </categories>
+  <policies>
+    <policy name="3473fb5c4c49f6885bbdf458aebe4d1d" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.4ce83d0827e61e45cb62fccb3e42c189)" presentation="$(presentation.3473fb5c4c49f6885bbdf458aebe4d1d)" key="Software\Company\Enum">
+      <parentCategory ref="33aa3d63bc1c502fda4005e218bf2169" />
+      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+      <elements>
+        <enum id="3473fb5c4c49f6885bbdf458aebe4d1d" key="Software\Company\Enum" valueName="EnumValueName">
+          <item displayName="$(string.f2feebbc6dfcb6f6930dd9ed87a925dd)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.aa80f1e3a17dfca37730cbc9c8befd2f)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+        </enum>
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>FSLogix</displayName>
+  <description>FSLogix Configuration</description>
+  <resources>
+    <stringTable>
+      <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
+      <string id="8ac88d137b3ba9132700b072685fb7dd">Description of decimal setting.</string>
+      <string id="0333b61d59f22f5233632f158693d626">DecimalSetting</string>
+      <string id="eb7d3a9e1c2bd85c48f19c3e04977831"></string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="0262e6c081f1ee5645a3fd71022cba1a">
+        <decimalTextBox refId="0262e6c081f1ee5645a3fd71022cba1a">Enabled</decimalTextBox>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

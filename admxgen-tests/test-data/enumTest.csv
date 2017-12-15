@@ -1,0 +1,2 @@
+"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
+"EnumSetting","Enabled","Machine","enum","Description of enum setting.","Software\Company\Enum","EnumValueName","","Type=Decimal;Values=Option A:0|Option B:1"
