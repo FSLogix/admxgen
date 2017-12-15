@@ -60,8 +60,20 @@
     <None Include="test-data\checkBoxTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="test-data\decimalTest-expected.adml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\decimalTest-expected.admx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="test-data\decimalTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\enumTest-expected.adml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\enumTest-expected.admx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="test-data\enumTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

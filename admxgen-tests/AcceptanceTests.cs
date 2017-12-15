@@ -55,20 +55,25 @@ namespace admxgen_tests
             p.WaitForExit();
             Assert.That(p.ExitCode, Is.EqualTo(0), outputStringBuilder.ToString());
 
-            CopyIf(expectedOutput + ".admx", "actual.admx");
-            CopyIf(expectedOutput + ".adml", "actual.adml");
+            if (CopyIf(expectedOutput + ".admx", "actual.admx") ||
+                CopyIf(expectedOutput + ".adml", "actual.adml"))
+            {
+                Assert.Fail("Expected output files missing");
+            }
 
             // Compare
             AssertFilesAreSame(expectedOutput + ".admx", "actual.admx");
             AssertFilesAreSame(expectedOutput + ".adml", "actual.adml");
         }
 
-        private static void CopyIf(string expectedOutputFilename, string actualFilename)
+        private static bool CopyIf(string expectedOutputFilename, string actualFilename)
         {
             if (!File.Exists(expectedOutputFilename))
             {
                 File.Copy(actualFilename, expectedOutputFilename);
+                return true;
             }
+            return false;
         }
     }
 }
