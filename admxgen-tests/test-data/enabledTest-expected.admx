@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="6.6" schemaVersion="8.8" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="NamespacePrefix" namespace="NamespacePrefix.Policies" />
+  </policyNamespaces>
+  <supersededAdm fileName="superseded.adm" />
+  <resources minRequiredRevision="6.6" />
+  <supportedOn>
+    <definitions>
+      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="19ab3cc3a0ccbb56822c9b02e89e0d1d" displayName="$(string.19ab3cc3a0ccbb56822c9b02e89e0d1d)" />
+  </categories>
+  <policies>
+    <policy name="1b172342bff287b4bb3584c2ad303c49" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.2e6b671ddc8a56df1f13a492a643959a)" presentation="$(presentation.1b172342bff287b4bb3584c2ad303c49)" key="Software\Company\Enabled">
+      <parentCategory ref="19ab3cc3a0ccbb56822c9b02e89e0d1d" />
+      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+    </policy>
+  </policies>
+</policyDefinitions>

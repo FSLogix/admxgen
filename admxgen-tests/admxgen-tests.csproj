@@ -76,6 +76,18 @@
     <None Include="test-data\decimalTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="test-data\enabledTest-expected.adml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\enabledTest-expected.admx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\enabledTest.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\enabledTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="test-data\enumTest-expected.adml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

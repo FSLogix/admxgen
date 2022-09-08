@@ -223,6 +223,7 @@ namespace admxgen
                     @class = (PolicyClass)Enum.Parse(typeof(PolicyClass), @class),
                     explainText = explainTextStringRef,
                     key = registryKey,
+                    valueName = valueName,
                     supportedOn = new SupportedOnReference { @ref = ParseSupportedOn(supportedOn) },
                     elements = parseTypeResults.Elements,
                     presentation = presentationStringRef
@@ -246,7 +247,7 @@ namespace admxgen
             return supportedOnId;
         }
 
-        private ParseTypeResult ParseType(string policyId, string type, string key, string valueName, IDictionary<string,string> properties)
+        private ParseTypeResult ParseType(string policyId, string type, string key, string valueName, IDictionary<string, string> properties)
         {
             var result = new ParseTypeResult();
             switch (type)
@@ -279,6 +280,9 @@ namespace admxgen
                     properties.TryGetValue("MaxValue", out maxValue);
                     result.Elements = new object[] { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) };
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DecimalTextBox { refId = policyId, Value = properties["Label"] } } };
+                    break;
+                case "enabled":
+                    result.Presentation = new PolicyPresentation { id = policyId };
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("valueName", "Unexpected policy type");

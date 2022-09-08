@@ -26,6 +26,7 @@ namespace admxgen_tests
         [TestCase("textBoxTest.json", "textBoxTest")]
         [TestCase("enumTest.json", "enumTest")]
         [TestCase("decimalTest.json", "decimalTest")]
+        [TestCase("enabledTest.json", "enabledTest")]
         public void InputFileGeneratesCorrectOutputFile(string input, string outputPrefix)
         {
             var testdir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
