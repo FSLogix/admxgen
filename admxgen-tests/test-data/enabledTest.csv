@@ -1,0 +1,2 @@
+"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
+"EnabledSetting","Enabled","Machine","enabled","Description of enabled setting.","Software\Company\Enabled","EnabledValueName","",""

@@ -40,10 +40,11 @@ namespace admxgen
                     return 1;
                 }
 
-                Console.WriteLine($"Generating from {args[0]}");
-                var admxSettings = JsonConvert.DeserializeObject<AdmxSettings>(File.ReadAllText(args[0]));
+                var admxSettingsFilename = args[0];
+                Console.WriteLine($"Generating from {admxSettingsFilename}");
+                var admxSettings = JsonConvert.DeserializeObject<AdmxSettings>(File.ReadAllText(admxSettingsFilename));
 
-                var parser = new InputParser(new StreamReader(admxSettings.File));
+                var parser = new InputParser(new StreamReader(Path.Combine(Path.GetDirectoryName(admxSettingsFilename), admxSettings.File)));
                 parser.Parse();
 
                 parser.Definitions.revision = admxSettings.Revision;
