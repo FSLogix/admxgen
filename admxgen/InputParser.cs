@@ -223,11 +223,14 @@ namespace admxgen
                     @class = (PolicyClass)Enum.Parse(typeof(PolicyClass), @class),
                     explainText = explainTextStringRef,
                     key = registryKey,
-                    valueName = valueName,
                     supportedOn = new SupportedOnReference { @ref = ParseSupportedOn(supportedOn) },
                     elements = parseTypeResults.Elements,
                     presentation = presentationStringRef
                 };
+                if (parseTypeResults.Elements == null)
+                {
+                    policy.valueName = valueName;
+                }
                 AddUniqueArrayItem(c => Definitions.policies.policy = c, Definitions.policies.policy, policy);
             }
             catch (Exception ex)
