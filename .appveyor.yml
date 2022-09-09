@@ -1,33 +1,21 @@
-version: '{build}'
-shallow_clone: true
-
-platform: Any CPU
+version: 1.0.{build}
+image: Visual Studio 2019
 configuration: Release
-image: Visual Studio 2017
-
-install:
-  - nuget restore admxgen.sln
-
-cache:
-  - packages -> **\packages.config
-  - '%LocalAppData%\NuGet\v3-cache'
-
+platform: Any CPU
+before_build:
+- cmd: nuget restore
 build:
-  parallel: true
   project: admxgen.sln
+  parallel: true
   verbosity: minimal
-
 test:
   assemblies:
     only:
-      - '**\*-tests.dll'
-
-deploy: off
-
+    - '**\*-tests.dll'
 notifications:
-  - provider: Email
-    to:
-      - jhurren@fslogix.com
-    on_build_status_changed: true
-    on_build_success: false
-    on_build_failure: false
+- provider: Email
+  to:
+  - lordjeb@lordjeb.com
+  on_build_success: false
+  on_build_failure: false
+  on_build_status_changed: true
