@@ -11,7 +11,7 @@
     </stringTable>
     <presentationTable>
       <presentation id="0262e6c081f1ee5645a3fd71022cba1a">
-        <decimalTextBox refId="0262e6c081f1ee5645a3fd71022cba1a">Enabled</decimalTextBox>
+        <decimalTextBox refId="0262e6c081f1ee5645a3fd71022cba1a" defaultValue="5">Enabled</decimalTextBox>
       </presentation>
     </presentationTable>
   </resources>

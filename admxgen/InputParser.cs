@@ -252,6 +252,7 @@ namespace admxgen
 
         private ParseTypeResult ParseType(string policyId, string type, string key, string valueName, IDictionary<string, string> properties)
         {
+            string defaultValue;
             var result = new ParseTypeResult();
             switch (type)
             {
@@ -272,7 +273,6 @@ namespace admxgen
                     break;
                 case "textBox":
                     result.Elements = new object[] { CreateTextElement(policyId, key, valueName) };
-                    string defaultValue;
                     properties.TryGetValue("Default", out defaultValue);
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new TextBox { refId = policyId, label = properties["Label"], defaultValue = defaultValue } } };
                     break;
@@ -281,8 +281,9 @@ namespace admxgen
                     properties.TryGetValue("MinValue", out minValue);
                     string maxValue;
                     properties.TryGetValue("MaxValue", out maxValue);
+                    properties.TryGetValue("Default", out defaultValue);
                     result.Elements = new object[] { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) };
-                    result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DecimalTextBox { refId = policyId, Value = properties["Label"] } } };
+                    result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DecimalTextBox { refId = policyId, Value = properties["Label"], defaultValue = uint.Parse(defaultValue) } } };
                     break;
                 case "enabled":
                     result.Presentation = new PolicyPresentation { id = policyId };
