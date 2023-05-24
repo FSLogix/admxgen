@@ -1,2 +1,2 @@
-"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
-"DecimalSetting","Enabled","Machine","decimal","Description of decimal setting.","Software\Company\Decimal","DecimalValueName","","MinValue=0;MaxValue=10;Default=5"
+CategoryId,Category,Id,Display Name,Class,Type,Explanation,Registry Key,Value Name,SupportedOnId,Supported On,Properties
+DecimalSetting,DecimalSetting,Enabled,Enabled,Machine,decimal,Description of decimal setting.,Software\Company\Decimal,DecimalValueName,v1234,Company Product v1234,MinValue=0;MaxValue=10;Default=5

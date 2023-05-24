@@ -1,0 +1,7 @@
+CategoryId,Category,Id,Display Name,Class,Type,Explanation,Registry Key,Value Name,SupportedOnId,Supported On,Properties
+Contoso,Contoso,Enabled,Enable Consoto Stuff,Machine,enabled,Description of this super complicated setting.,Software\Contoso\Enabled,Enabled,v1234,Contoso Product v1234,
+Contoso\Product\Feat1,Contoso\Product\Feature A,FeatA_Enabled,Enable Feature A,Machine,enabled,Description of this super complicated setting.,Software\Contoso\Product\Feature A\Enabled,Enabled,v1234,Contoso Product v1234,
+Contoso\Product\Feat1,Contoso\Product\Feature A,FeatA_Config,Configure Feature A,User,textBox,Description of this super complicated setting.,Software\Contoso\Product\Feature A\Config,Config,v1234,Contoso Product v1234,Default=My default value;Label=Answer Here
+Contoso\Product\Feat2,Contoso\Product\Feature B,FeatB_Enabled,Enable Feature B,Machine,enabled,Description of this super complicated setting.,Software\Contoso\Product\Feature B\Enabled,Enabled,v1234,Contoso Product v1234,
+Contoso\Product\Feat2,Contoso\Product\Feature B,FeatB_Config,Configure Feature B,User,enum,Description of this super complicated setting.,Software\Contoso\Product\Feature B\Config,Config,v1234,Contoso Product v1234,Type=Decimal;Values=Option A:0|Option B:1|Option C:2
+Contoso\Product\Feat2\Contoso,Contoso\Product\Feature B\Contoso,Contoso,Second contoso,User,textBox,A second copy of category Contoso.,Software\Contoso\Product\Feature B\Contoso,Contoso,v1234,Contoso Product v1234,Default=My default value;Label=Answer Here

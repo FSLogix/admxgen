@@ -1,2 +1,2 @@
-"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
-"TextBoxSetting","Enabled","Machine","textBox","Description of text box setting.","Software\Company\TextBox","TextBoxValueName","",""
+CategoryId,Category,Id,Display Name,Class,Type,Explanation,Registry Key,Value Name,SupportedOnId,Supported On,Properties
+TextBoxSetting,TextBoxSetting,Enabled,Enabled,Machine,textBox,Description of text box setting.,Software\Company\TextBox,TextBoxValueName,v1234,Company Product v1234,

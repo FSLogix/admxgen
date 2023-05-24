@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="6.6" schemaVersion="8.8" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Display Name</displayName>
+  <description>Description</description>
+  <resources>
+    <stringTable>
+      <string id="Enabled_Display">Enable Consoto Stuff</string>
+      <string id="Enabled_Explain">Description of this super complicated setting.</string>
+      <string id="Contoso_Category">Contoso</string>
+      <string id="v1234_Definition">Contoso Product v1234</string>
+      <string id="FeatA_Enabled_Display">Enable Feature A</string>
+      <string id="FeatA_Enabled_Explain">Description of this super complicated setting.</string>
+      <string id="Product_Category">Product</string>
+      <string id="Feat1_Category">Feature A</string>
+      <string id="FeatA_Config_Display">Configure Feature A</string>
+      <string id="FeatA_Config_Explain">Description of this super complicated setting.</string>
+      <string id="FeatB_Enabled_Display">Enable Feature B</string>
+      <string id="FeatB_Enabled_Explain">Description of this super complicated setting.</string>
+      <string id="Feat2_Category">Feature B</string>
+      <string id="FeatB_Config_Display">Configure Feature B</string>
+      <string id="FeatB_Config_Explain">Description of this super complicated setting.</string>
+      <string id="FeatB_Config_0_Enum">Option A</string>
+      <string id="FeatB_Config_1_Enum">Option B</string>
+      <string id="FeatB_Config_2_Enum">Option C</string>
+      <string id="Contoso_Display">Second contoso</string>
+      <string id="Contoso_Explain">A second copy of category Contoso.</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="Enabled" />
+      <presentation id="FeatA_Enabled" />
+      <presentation id="FeatA_Config">
+        <textBox refId="FeatA_Config">
+          <label>Answer Here</label>
+          <defaultValue>My default value</defaultValue>
+        </textBox>
+      </presentation>
+      <presentation id="FeatB_Enabled" />
+      <presentation id="FeatB_Config">
+        <dropdownList refId="FeatB_Config" />
+      </presentation>
+      <presentation id="Contoso">
+        <textBox refId="Contoso">
+          <label>Answer Here</label>
+          <defaultValue>My default value</defaultValue>
+        </textBox>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

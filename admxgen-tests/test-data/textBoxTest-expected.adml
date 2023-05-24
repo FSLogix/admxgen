@@ -4,14 +4,14 @@
   <description>Description</description>
   <resources>
     <stringTable>
-      <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
-      <string id="26952c7bf6f7958020e5a7bba4a34ad4">Description of text box setting.</string>
-      <string id="ff3955f84347b76eb014fc78530677c1">TextBoxSetting</string>
-      <string id="eb7d3a9e1c2bd85c48f19c3e04977831"></string>
+      <string id="Enabled_Display">Enabled</string>
+      <string id="Enabled_Explain">Description of text box setting.</string>
+      <string id="TextBoxSetting_Category">TextBoxSetting</string>
+      <string id="v1234_Definition">Company Product v1234</string>
     </stringTable>
     <presentationTable>
-      <presentation id="d002c965ab60d35668cd0b143bbe489b">
-        <textBox refId="d002c965ab60d35668cd0b143bbe489b">
+      <presentation id="Enabled">
+        <textBox refId="Enabled">
           <label>Enabled</label>
         </textBox>
       </presentation>

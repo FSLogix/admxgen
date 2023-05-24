@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="6.6" schemaVersion="8.8" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="NamespacePrefix" namespace="NamespacePrefix.Policies" />
+  </policyNamespaces>
+  <supersededAdm fileName="superseded.adm" />
+  <resources minRequiredRevision="6.6" />
+  <supportedOn>
+    <definitions>
+      <definition name="v1234" displayName="$(string.v1234_Definition)" />
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="Contoso" displayName="$(string.Contoso_Category)" />
+    <category name="Product" displayName="$(string.Product_Category)">
+      <parentCategory ref="Contoso" />
+    </category>
+    <category name="Feat1" displayName="$(string.Feat1_Category)">
+      <parentCategory ref="Product" />
+    </category>
+    <category name="Feat2" displayName="$(string.Feat2_Category)">
+      <parentCategory ref="Product" />
+    </category>
+  </categories>
+  <policies>
+    <policy name="Enabled" class="Machine" displayName="$(string.Enabled_Display)" explainText="$(string.Enabled_Explain)" presentation="$(presentation.Enabled)" key="Software\Contoso\Enabled" valueName="Enabled">
+      <parentCategory ref="Contoso" />
+      <supportedOn ref="v1234" />
+    </policy>
+    <policy name="FeatA_Enabled" class="Machine" displayName="$(string.FeatA_Enabled_Display)" explainText="$(string.FeatA_Enabled_Explain)" presentation="$(presentation.FeatA_Enabled)" key="Software\Contoso\Product\Feature A\Enabled" valueName="Enabled">
+      <parentCategory ref="Feat1" />
+      <supportedOn ref="v1234" />
+    </policy>
+    <policy name="FeatA_Config" class="User" displayName="$(string.FeatA_Config_Display)" explainText="$(string.FeatA_Config_Explain)" presentation="$(presentation.FeatA_Config)" key="Software\Contoso\Product\Feature A\Config">
+      <parentCategory ref="Feat1" />
+      <supportedOn ref="v1234" />
+      <elements>
+        <text id="FeatA_Config" key="Software\Contoso\Product\Feature A\Config" valueName="Config" required="true" />
+      </elements>
+    </policy>
+    <policy name="FeatB_Enabled" class="Machine" displayName="$(string.FeatB_Enabled_Display)" explainText="$(string.FeatB_Enabled_Explain)" presentation="$(presentation.FeatB_Enabled)" key="Software\Contoso\Product\Feature B\Enabled" valueName="Enabled">
+      <parentCategory ref="Feat2" />
+      <supportedOn ref="v1234" />
+    </policy>
+    <policy name="FeatB_Config" class="User" displayName="$(string.FeatB_Config_Display)" explainText="$(string.FeatB_Config_Explain)" presentation="$(presentation.FeatB_Config)" key="Software\Contoso\Product\Feature B\Config">
+      <parentCategory ref="Feat2" />
+      <supportedOn ref="v1234" />
+      <elements>
+        <enum id="FeatB_Config" key="Software\Contoso\Product\Feature B\Config" valueName="Config">
+          <item displayName="$(string.FeatB_Config_0_Enum)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.FeatB_Config_1_Enum)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+          <item displayName="$(string.FeatB_Config_2_Enum)">
+            <value>
+              <decimal value="2" />
+            </value>
+          </item>
+        </enum>
+      </elements>
+    </policy>
+    <policy name="Contoso" class="User" displayName="$(string.Contoso_Display)" explainText="$(string.Contoso_Explain)" presentation="$(presentation.Contoso)" key="Software\Contoso\Product\Feature B\Contoso">
+      <parentCategory ref="Contoso" />
+      <supportedOn ref="v1234" />
+      <elements>
+        <text id="Contoso" key="Software\Contoso\Product\Feature B\Contoso" valueName="Contoso" required="true" />
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

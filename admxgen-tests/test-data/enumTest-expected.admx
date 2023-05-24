@@ -7,24 +7,24 @@
   <resources minRequiredRevision="6.6" />
   <supportedOn>
     <definitions>
-      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+      <definition name="v1234" displayName="$(string.v1234_Definition)" />
     </definitions>
   </supportedOn>
   <categories>
-    <category name="33aa3d63bc1c502fda4005e218bf2169" displayName="$(string.33aa3d63bc1c502fda4005e218bf2169)" />
+    <category name="EnumSetting" displayName="$(string.EnumSetting_Category)" />
   </categories>
   <policies>
-    <policy name="3473fb5c4c49f6885bbdf458aebe4d1d" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.4ce83d0827e61e45cb62fccb3e42c189)" presentation="$(presentation.3473fb5c4c49f6885bbdf458aebe4d1d)" key="Software\Company\Enum">
-      <parentCategory ref="33aa3d63bc1c502fda4005e218bf2169" />
-      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+    <policy name="Enabled" class="Machine" displayName="$(string.Enabled_Display)" explainText="$(string.Enabled_Explain)" presentation="$(presentation.Enabled)" key="Software\Company\Enum">
+      <parentCategory ref="EnumSetting" />
+      <supportedOn ref="v1234" />
       <elements>
-        <enum id="3473fb5c4c49f6885bbdf458aebe4d1d" key="Software\Company\Enum" valueName="EnumValueName">
-          <item displayName="$(string.f2feebbc6dfcb6f6930dd9ed87a925dd)">
+        <enum id="Enabled" key="Software\Company\Enum" valueName="EnumValueName">
+          <item displayName="$(string.Enabled_0_Enum)">
             <value>
               <decimal value="0" />
             </value>
           </item>
-          <item displayName="$(string.aa80f1e3a17dfca37730cbc9c8befd2f)">
+          <item displayName="$(string.Enabled_1_Enum)">
             <value>
               <decimal value="1" />
             </value>
