@@ -18,7 +18,7 @@ namespace admxgen_tests
 
             for (int i = 0; i < contents1.Length; ++i)
             {
-                Assert.That(contents1[i], Is.EqualTo(contents2[i]), "Files differ on line {0}", i);
+                Assert.That(contents2[i], Is.EqualTo(contents1[i]), "Files differ on line {0}", i);
             }
         }
 
@@ -27,6 +27,7 @@ namespace admxgen_tests
         [TestCase("enumTest.json", "enumTest")]
         [TestCase("decimalTest.json", "decimalTest")]
         [TestCase("enabledTest.json", "enabledTest")]
+        [TestCase("complexTest.json", "complexTest")]
         public void InputFileGeneratesCorrectOutputFile(string input, string outputPrefix)
         {
             var testdir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

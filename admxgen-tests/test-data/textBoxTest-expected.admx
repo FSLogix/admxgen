@@ -7,18 +7,18 @@
   <resources minRequiredRevision="6.6" />
   <supportedOn>
     <definitions>
-      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+      <definition name="v1234" displayName="$(string.v1234_Definition)" />
     </definitions>
   </supportedOn>
   <categories>
-    <category name="ff3955f84347b76eb014fc78530677c1" displayName="$(string.ff3955f84347b76eb014fc78530677c1)" />
+    <category name="TextBoxSetting" displayName="$(string.TextBoxSetting_Category)" />
   </categories>
   <policies>
-    <policy name="d002c965ab60d35668cd0b143bbe489b" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.26952c7bf6f7958020e5a7bba4a34ad4)" presentation="$(presentation.d002c965ab60d35668cd0b143bbe489b)" key="Software\Company\TextBox">
-      <parentCategory ref="ff3955f84347b76eb014fc78530677c1" />
-      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+    <policy name="Enabled" class="Machine" displayName="$(string.Enabled_Display)" explainText="$(string.Enabled_Explain)" presentation="$(presentation.Enabled)" key="Software\Company\TextBox">
+      <parentCategory ref="TextBoxSetting" />
+      <supportedOn ref="v1234" />
       <elements>
-        <text id="d002c965ab60d35668cd0b143bbe489b" key="Software\Company\TextBox" valueName="TextBoxValueName" required="true" />
+        <text id="Enabled" key="Software\Company\TextBox" valueName="TextBoxValueName" required="true" />
       </elements>
     </policy>
   </policies>

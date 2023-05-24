@@ -1,2 +1,2 @@
-"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
-"EnabledSetting","Enabled","Machine","enabled","Description of enabled setting.","Software\Company\Enabled","EnabledValueName","",""
+CategoryId,Category,Id,Display Name,Class,Type,Explanation,Registry Key,Value Name,SupportedOnId,Supported On,Properties
+EnabledSetting,EnabledSetting,Enabled,Enabled,Machine,enabled,Description of enabled setting.,Software\Company\Enabled,EnabledValueName,v1234,Company Product v1234,

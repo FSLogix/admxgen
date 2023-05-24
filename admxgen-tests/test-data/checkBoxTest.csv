@@ -1,2 +1,2 @@
-"Category","Display Name","Class","Type","Explanation","Registry Key","Value Name","Supported On","Properties"
-"CheckBoxSetting","Enabled","Machine","checkBox","Description of check box setting.","Software\Company\CheckBox","CheckBoxValueName","",""
+"CategoryId","Category","Id","Display Name","Class","Type","Explanation","Registry Key","Value Name","SupportedOnId","Supported On","Properties"
+"CheckBoxSetting","Check Box Setting","Enabled","Enabled","Machine","checkBox","Description of check box setting.","Software\Company\CheckBox","CheckBoxValueName","v1234","Company Product v1234",""

@@ -7,18 +7,18 @@
   <resources minRequiredRevision="6.6" />
   <supportedOn>
     <definitions>
-      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+      <definition name="v1234" displayName="$(string.v1234_Definition)" />
     </definitions>
   </supportedOn>
   <categories>
-    <category name="044bea4c9582a4bf13aef79d11a968a3" displayName="$(string.044bea4c9582a4bf13aef79d11a968a3)" />
+    <category name="CheckBoxSetting" displayName="$(string.CheckBoxSetting_Category)" />
   </categories>
   <policies>
-    <policy name="a34caee91acc604ca6e103d17c3fc4ed" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.fbc286ab87756b963ee61dfc6dc3649d)" presentation="$(presentation.a34caee91acc604ca6e103d17c3fc4ed)" key="Software\Company\CheckBox">
-      <parentCategory ref="044bea4c9582a4bf13aef79d11a968a3" />
-      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+    <policy name="Enabled" class="Machine" displayName="$(string.Enabled_Display)" explainText="$(string.Enabled_Explain)" presentation="$(presentation.Enabled)" key="Software\Company\CheckBox">
+      <parentCategory ref="CheckBoxSetting" />
+      <supportedOn ref="v1234" />
       <elements>
-        <boolean id="a34caee91acc604ca6e103d17c3fc4ed" key="Software\Company\CheckBox" valueName="CheckBoxValueName">
+        <boolean id="Enabled" key="Software\Company\CheckBox" valueName="CheckBoxValueName">
           <trueValue>
             <decimal value="1" />
           </trueValue>

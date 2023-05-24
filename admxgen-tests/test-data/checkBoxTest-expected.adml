@@ -4,14 +4,14 @@
   <description>Description</description>
   <resources>
     <stringTable>
-      <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
-      <string id="fbc286ab87756b963ee61dfc6dc3649d">Description of check box setting.</string>
-      <string id="044bea4c9582a4bf13aef79d11a968a3">CheckBoxSetting</string>
-      <string id="eb7d3a9e1c2bd85c48f19c3e04977831"></string>
+      <string id="Enabled_Display">Enabled</string>
+      <string id="Enabled_Explain">Description of check box setting.</string>
+      <string id="CheckBoxSetting_Category">Check Box Setting</string>
+      <string id="v1234_Definition">Company Product v1234</string>
     </stringTable>
     <presentationTable>
-      <presentation id="a34caee91acc604ca6e103d17c3fc4ed">
-        <checkBox refId="a34caee91acc604ca6e103d17c3fc4ed">Enabled</checkBox>
+      <presentation id="Enabled">
+        <checkBox refId="Enabled">Enabled</checkBox>
       </presentation>
     </presentationTable>
   </resources>

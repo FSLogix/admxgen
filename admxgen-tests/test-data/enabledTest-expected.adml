@@ -4,13 +4,13 @@
   <description>Description</description>
   <resources>
     <stringTable>
-      <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
-      <string id="2e6b671ddc8a56df1f13a492a643959a">Description of enabled setting.</string>
-      <string id="19ab3cc3a0ccbb56822c9b02e89e0d1d">EnabledSetting</string>
-      <string id="eb7d3a9e1c2bd85c48f19c3e04977831"></string>
+      <string id="Enabled_Display">Enabled</string>
+      <string id="Enabled_Explain">Description of enabled setting.</string>
+      <string id="EnabledSetting_Category">EnabledSetting</string>
+      <string id="v1234_Definition">Company Product v1234</string>
     </stringTable>
     <presentationTable>
-      <presentation id="1b172342bff287b4bb3584c2ad303c49" />
+      <presentation id="Enabled" />
     </presentationTable>
   </resources>
 </policyDefinitionResources>

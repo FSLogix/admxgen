@@ -7,18 +7,18 @@
   <resources minRequiredRevision="6.6" />
   <supportedOn>
     <definitions>
-      <definition name="eb7d3a9e1c2bd85c48f19c3e04977831" displayName="$(string.eb7d3a9e1c2bd85c48f19c3e04977831)" />
+      <definition name="v1234" displayName="$(string.v1234_Definition)" />
     </definitions>
   </supportedOn>
   <categories>
-    <category name="0333b61d59f22f5233632f158693d626" displayName="$(string.0333b61d59f22f5233632f158693d626)" />
+    <category name="DecimalSetting" displayName="$(string.DecimalSetting_Category)" />
   </categories>
   <policies>
-    <policy name="0262e6c081f1ee5645a3fd71022cba1a" class="Machine" displayName="$(string.271e8c351ecdb7e90259dd1154fad898)" explainText="$(string.8ac88d137b3ba9132700b072685fb7dd)" presentation="$(presentation.0262e6c081f1ee5645a3fd71022cba1a)" key="Software\Company\Decimal">
-      <parentCategory ref="0333b61d59f22f5233632f158693d626" />
-      <supportedOn ref="eb7d3a9e1c2bd85c48f19c3e04977831" />
+    <policy name="Enabled" class="Machine" displayName="$(string.Enabled_Display)" explainText="$(string.Enabled_Explain)" presentation="$(presentation.Enabled)" key="Software\Company\Decimal">
+      <parentCategory ref="DecimalSetting" />
+      <supportedOn ref="v1234" />
       <elements>
-        <decimal id="0262e6c081f1ee5645a3fd71022cba1a" key="Software\Company\Decimal" valueName="DecimalValueName" required="true" maxValue="10" />
+        <decimal id="Enabled" key="Software\Company\Decimal" valueName="DecimalValueName" required="true" maxValue="10" />
       </elements>
     </policy>
   </policies>

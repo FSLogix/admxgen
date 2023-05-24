@@ -4,16 +4,16 @@
   <description>Description</description>
   <resources>
     <stringTable>
-      <string id="271e8c351ecdb7e90259dd1154fad898">Enabled</string>
-      <string id="4ce83d0827e61e45cb62fccb3e42c189">Description of enum setting.</string>
-      <string id="f2feebbc6dfcb6f6930dd9ed87a925dd">Option A</string>
-      <string id="aa80f1e3a17dfca37730cbc9c8befd2f">Option B</string>
-      <string id="33aa3d63bc1c502fda4005e218bf2169">EnumSetting</string>
-      <string id="eb7d3a9e1c2bd85c48f19c3e04977831"></string>
+      <string id="Enabled_Display">Enabled</string>
+      <string id="Enabled_Explain">Description of enum setting.</string>
+      <string id="Enabled_0_Enum">Option A</string>
+      <string id="Enabled_1_Enum">Option B</string>
+      <string id="EnumSetting_Category">EnumSetting</string>
+      <string id="v1234_Definition">Company Product v1234</string>
     </stringTable>
     <presentationTable>
-      <presentation id="3473fb5c4c49f6885bbdf458aebe4d1d">
-        <dropdownList refId="3473fb5c4c49f6885bbdf458aebe4d1d" />
+      <presentation id="Enabled">
+        <dropdownList refId="Enabled" />
       </presentation>
     </presentationTable>
   </resources>

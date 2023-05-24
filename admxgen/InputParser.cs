@@ -11,6 +11,8 @@ namespace admxgen
 {
     public class InputParser
     {
+        private enum ResourceType { Category, Definition, Policy, Display, Explain, Presentation, Enum };
+
         private enum EnumerationElementType { Decimal, @String };
 
         private struct ParseTypeResult
@@ -92,25 +94,27 @@ namespace admxgen
                 valueName = valueName
             };
 
+            int enumCounter = 0;
             var itemList = new List<EnumerationElementItem>();
             foreach (var val in valuesList)
             {
+                var enumStringResourceId = GetResourceId(ResourceType.Enum, $"{policyId}_{enumCounter}");
+                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = enumStringResourceId, Value = val.Key });
+
                 if (type == EnumerationElementType.Decimal)
                 {
-                    var enumStringResourceId = GetResourceId("Enum", policyId, val.Key);
-                    AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = enumStringResourceId, Value = val.Key });
                     itemList.Add(new EnumerationElementItem { displayName = GetStringRef(enumStringResourceId), value = new Value { Item = new ValueDecimal { value = val.Value } } });
                 }
                 else if (type == EnumerationElementType.String)
                 {
-                    var enumStringResourceId = GetResourceId("Enum", policyId, val.Key);
-                    AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = enumStringResourceId, Value = val.Key });
                     itemList.Add(new EnumerationElementItem { displayName = GetStringRef(enumStringResourceId), value = new Value { Item = val.Key } });
                 }
                 else
                 {
                     throw new ArgumentOutOfRangeException("type", "Unexpected enumeration element type");
                 }
+
+                enumCounter++;
             }
             element.item = itemList.ToArray();
 
@@ -122,19 +126,30 @@ namespace admxgen
             return new TextElement { id = policyId, key = key, valueName = valueName, required = true };
         }
 
-        private string GetRef(string type, string resourceId)
+        private void EnsureValidId(string newCategoryId)
         {
-            return $"$({type}.{resourceId})";
+            Regex rx = new Regex(@"^[a-zA-Z0-9_]*$");
+            if (!rx.IsMatch(newCategoryId))
+            {
+                throw new ArgumentException($"Invalid identifier: {newCategoryId}");
+            }
         }
 
-        private string GetResourceId(params string[] ss)
+        private string GetResourceId(ResourceType resourceType, string resourceId)
         {
-            return _hashCalculator.GetStringHash(string.Concat(ss));
+            if (resourceType == ResourceType.Policy) { return resourceId; }
+
+            return $"{resourceId}_{resourceType}";
+        }
+
+        private string GetPresentationRef(string resourceId)
+        {
+            return $"$(presentation.{resourceId})";
         }
 
         private string GetStringRef(string resourceId)
         {
-            return GetRef("string", resourceId);
+            return $"$(string.{resourceId})";
         }
 
         public void Parse()
@@ -149,20 +164,29 @@ namespace admxgen
             }
         }
 
-        private string ParseCategory(string category)
+        private string ParseCategory(string categoryId, string category)
         {
             string lastCategoryId = string.Empty;
-            string fullCatName = string.Empty;
-            foreach (var cat in category.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                fullCatName += string.IsNullOrEmpty(fullCatName) ? cat : "\\" + cat;
-                var categoryStringResourceId = GetResourceId("Cat", fullCatName);
-                var categoryId = GetResourceId("Cat", fullCatName);
 
-                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = categoryStringResourceId, Value = cat });
+            var splitCategoryId = categoryId.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            var splitCategory = category.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (splitCategoryId.Length != splitCategory.Length)
+            {
+                throw new ArgumentException("CategoryId and Category are misaligned");
+            }
+
+            for (int i = 0; i < splitCategoryId.Length; i++)
+            {
+                var newCategoryId = splitCategoryId[i];
+                EnsureValidId(newCategoryId);
+
+                var categoryStringResourceId = GetResourceId(ResourceType.Category, newCategoryId);
+
+                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = categoryStringResourceId, Value = splitCategory[i] });
                 var theNewCategory = new Category
                 {
-                    name = categoryId,
+                    name = newCategoryId,
                     displayName = GetStringRef(categoryStringResourceId)
                 };
                 if (!string.IsNullOrEmpty(lastCategoryId))
@@ -171,7 +195,7 @@ namespace admxgen
                 }
                 AddUniqueArrayItem(c => Definitions.categories.category = c, Definitions.categories.category, theNewCategory);
 
-                lastCategoryId = categoryId;
+                lastCategoryId = newCategoryId;
             }
 
             return lastCategoryId;
@@ -179,27 +203,31 @@ namespace admxgen
 
         private void ParseLine(CsvReader csvReader)
         {
+            var categoryId = csvReader["CategoryId"];
             var category = csvReader["Category"];
+            var policyId = csvReader["Id"];
             var displayName = csvReader["Display Name"];
             var @class = csvReader["Class"];
             var type = csvReader["Type"];
             var explanation = csvReader["Explanation"];
             var registryKey = csvReader["Registry Key"];
             var valueName = csvReader["Value Name"];
+            var supportedOnId = csvReader["SupportedOnId"];
             var supportedOn = csvReader["Supported On"];
             var properties = csvReader["Properties"];
 
             try
             {
-                var displayNameStringResourceId = GetResourceId("DisplayName", displayName);
-                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = displayNameStringResourceId, Value = displayName });
-                var displayNameStringRef = GetStringRef(displayNameStringResourceId);
+                EnsureValidId(policyId);
+                EnsureValidId(supportedOnId);
 
-                var explainTextStringResourceId = GetResourceId("Explain", explanation);
-                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = explainTextStringResourceId, Value = explanation });
-                var explainTextStringRef = GetStringRef(explainTextStringResourceId);
+                var displayResId = GetResourceId(ResourceType.Display, policyId);
+                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = displayResId, Value = displayName });
+                var displayStringRef = GetStringRef(displayResId);
 
-                var policyId = GetResourceId("Policy", category, displayName);
+                var explainResId = GetResourceId(ResourceType.Explain, policyId);
+                AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = explainResId, Value = explanation });
+                var explainStringRef = GetStringRef(explainResId);
 
                 var propertiesDictionary = properties.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
                    .Select(part => part.Split('='))
@@ -213,17 +241,17 @@ namespace admxgen
 
                 var parseTypeResults = ParseType(policyId, type, registryKey, valueName, propertiesDictionary);
                 AddUniqueArrayItem(c => Resources.resources.presentationTable.presentation = c, Resources.resources.presentationTable.presentation, parseTypeResults.Presentation);
-                var presentationStringRef = GetRef("presentation", parseTypeResults.Presentation.id);
+                var presentationStringRef = GetPresentationRef(parseTypeResults.Presentation.id);
 
                 var policy = new PolicyDefinition
                 {
                     name = policyId,
-                    parentCategory = new CategoryReference { @ref = ParseCategory(category) },
-                    displayName = displayNameStringRef,
+                    parentCategory = new CategoryReference { @ref = ParseCategory(categoryId, category) },
+                    displayName = displayStringRef,
                     @class = (PolicyClass)Enum.Parse(typeof(PolicyClass), @class),
-                    explainText = explainTextStringRef,
+                    explainText = explainStringRef,
                     key = registryKey,
-                    supportedOn = new SupportedOnReference { @ref = ParseSupportedOn(supportedOn) },
+                    supportedOn = new SupportedOnReference { @ref = ParseSupportedOn(supportedOnId, supportedOn) },
                     elements = parseTypeResults.Elements,
                     presentation = presentationStringRef
                 };
@@ -239,13 +267,11 @@ namespace admxgen
             }
         }
 
-        private string ParseSupportedOn(string supportedOn)
+        private string ParseSupportedOn(string supportedOnId, string supportedOn)
         {
-            var supportedOnStringResourceId = GetResourceId("SupportedOn", supportedOn);
-            var supportedOnId = GetResourceId("SupportedOn", supportedOn);
-
-            AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = supportedOnStringResourceId, Value = supportedOn });
-            AddUniqueArrayItem(c => Definitions.supportedOn.definitions = c, Definitions.supportedOn.definitions, new SupportedOnDefinition { name = supportedOnId, displayName = GetStringRef(supportedOnStringResourceId) });
+            var id = GetResourceId(ResourceType.Definition, supportedOnId);
+            AddUniqueArrayItem(c => Resources.resources.stringTable.@string = c, Resources.resources.stringTable.@string, new LocalizedString { id = id, Value = supportedOn });
+            AddUniqueArrayItem(c => Definitions.supportedOn.definitions = c, Definitions.supportedOn.definitions, new SupportedOnDefinition { name = supportedOnId, displayName = GetStringRef(id) });
 
             return supportedOnId;
         }
