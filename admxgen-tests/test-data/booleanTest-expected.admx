@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="6.6" schemaVersion="8.8" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="NamespacePrefix" namespace="NamespacePrefix.Policies" />
+  </policyNamespaces>
+  <supersededAdm fileName="superseded.adm" />
+  <resources minRequiredRevision="6.6" />
+  <supportedOn>
+    <definitions>
+      <definition name="v1234" displayName="$(string.v1234_Definition)" />
+    </definitions>
+  </supportedOn>
+  <categories>
+    <category name="BooleanSettingCatId" displayName="$(string.BooleanSettingCatId_Category)" />
+  </categories>
+  <policies>
+    <policy name="BooleanId" class="Machine" displayName="$(string.BooleanId_Display)" explainText="$(string.BooleanId_Explain)" presentation="$(presentation.BooleanId)" key="Software\Company\Boolean">
+      <parentCategory ref="BooleanSettingCatId" />
+      <supportedOn ref="v1234" />
+      <elements>
+        <enum id="BooleanId" key="Software\Company\Boolean" valueName="BooleanValueName">
+          <item displayName="$(string.BooleanId_0_Enum)">
+            <value>
+              <decimal value="0" />
+            </value>
+          </item>
+          <item displayName="$(string.BooleanId_1_Enum)">
+            <value>
+              <decimal value="1" />
+            </value>
+          </item>
+        </enum>
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

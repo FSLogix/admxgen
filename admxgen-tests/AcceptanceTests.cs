@@ -27,6 +27,7 @@ namespace admxgen_tests
         [TestCase("enumTest.json", "enumTest")]
         [TestCase("decimalTest.json", "decimalTest")]
         [TestCase("enabledTest.json", "enabledTest")]
+        [TestCase("booleanTest.json", "booleanTest")]
         [TestCase("complexTest.json", "complexTest")]
         public void InputFileGeneratesCorrectOutputFile(string input, string outputPrefix)
         {

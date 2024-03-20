@@ -1,0 +1,2 @@
+CategoryId,Category,Id,Display Name,Class,Type,Explanation,Registry Key,Value Name,SupportedOnId,Supported On,Properties
+BooleanSettingCatId,BooleanSettingCat,BooleanId,Boolean,Machine,boolean,Description of boolean setting.,Software\Company\Boolean,BooleanValueName,v1234,Company Product v1234,
