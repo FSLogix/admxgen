@@ -74,17 +74,6 @@ namespace admxgen
             setCollection(mutableCollection.ToArray());
         }
 
-        BooleanElement CreateBooleanElement(string policyId, string key, string valueName)
-        {
-            return new BooleanElement { id = policyId, key = key, valueName = valueName, trueValue = new Value { Item = new ValueDecimal { value = 1 } }, falseValue = new Value { Item = new ValueDecimal { value = 0 } } };
-        }
-
-        private DecimalElement CreateDecimalElement(string policyId, string key, string valueName, uint minValue, uint maxValue)
-        {
-
-            return new DecimalElement { id = policyId, key = key, valueName = valueName, minValue = minValue, maxValue = maxValue, required = true };
-        }
-
         private object CreateEnumElement(string policyId, string key, string valueName, EnumerationElementType type, IDictionary<string, uint> valuesList)
         {
             var element = new EnumerationElement
@@ -119,11 +108,6 @@ namespace admxgen
             element.item = itemList.ToArray();
 
             return element;
-        }
-
-        TextElement CreateTextElement(string policyId, string key, string valueName)
-        {
-            return new TextElement { id = policyId, key = key, valueName = valueName, required = true };
         }
 
         private void EnsureValidId(string newCategoryId)
@@ -297,12 +281,28 @@ namespace admxgen
                     break;
 
                 case "checkBox":
-                    result.Elements = new object[] { CreateBooleanElement(policyId, key, valueName) };
+                case "enabledCheckBox":
+                    result.Elements = new object[] {
+                        new BooleanElement {
+                            id = policyId,
+                            key = key,
+                            valueName = valueName,
+                            trueValue = new Value { Item = new ValueDecimal { value = 1 } },
+                            falseValue = new Value { Item = new ValueDecimal { value = 0 } }
+                        }
+                    };
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new CheckBox { refId = policyId, Value = properties["Label"] } } };
                     break;
 
                 case "textBox":
-                    result.Elements = new object[] { CreateTextElement(policyId, key, valueName) };
+                    result.Elements = new object[] {
+                        new TextElement {
+                            id = policyId,
+                            key = key,
+                            valueName = valueName,
+                            required = true
+                        }
+                    };
                     properties.TryGetValue("Default", out defaultValue);
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new TextBox { refId = policyId, label = properties["Label"], defaultValue = defaultValue } } };
                     break;
@@ -313,7 +313,16 @@ namespace admxgen
                     string maxValue;
                     properties.TryGetValue("MaxValue", out maxValue);
                     properties.TryGetValue("Default", out defaultValue);
-                    result.Elements = new object[] { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) };
+                    result.Elements = new object[] {
+                        new DecimalElement { 
+                            id = policyId,
+                            key = key,
+                            valueName = valueName,
+                            minValue = uint.Parse(minValue),
+                            maxValue = uint.Parse(maxValue),
+                            required = true
+                        }
+                    };
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DecimalTextBox { refId = policyId, Value = properties["Label"], defaultValue = uint.Parse(defaultValue) } } };
                     break;
 
@@ -322,6 +331,7 @@ namespace admxgen
                     break;
 
                 case "boolean":
+                case "enabledDropDown":
                     {
                         var enumerationElementType = EnumerationElementType.Decimal;
                         var valuesList = new Dictionary<string, uint>
