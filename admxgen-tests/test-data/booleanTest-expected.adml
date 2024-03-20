@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="6.6" schemaVersion="8.8" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Display Name</displayName>
+  <description>Description</description>
+  <resources>
+    <stringTable>
+      <string id="BooleanId_Display">Boolean</string>
+      <string id="BooleanId_Explain">Description of boolean setting.</string>
+      <string id="BooleanId_0_Enum">Disabled</string>
+      <string id="BooleanId_1_Enum">Enabled</string>
+      <string id="BooleanSettingCatId_Category">BooleanSettingCat</string>
+      <string id="v1234_Definition">Company Product v1234</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="BooleanId">
+        <dropdownList refId="BooleanId" />
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

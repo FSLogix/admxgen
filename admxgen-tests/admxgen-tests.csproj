@@ -77,6 +77,18 @@
     <None Include="test-data\decimalTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="test-data\booleanTest-expected.adml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\booleanTest-expected.admx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\booleanTest.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="test-data\booleanTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="test-data\enabledTest-expected.adml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

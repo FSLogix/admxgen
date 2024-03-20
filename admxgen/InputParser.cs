@@ -283,25 +283,30 @@ namespace admxgen
             switch (type)
             {
                 case "enum":
-                    var enumerationElementType = (EnumerationElementType)Enum.Parse(typeof(EnumerationElementType), properties["Type"]);
-                    var valuesList = new Dictionary<string, uint>();
-                    foreach (var v in properties["Values"].Split(new[] { '|' }))
                     {
-                        var vv = v.Split(new[] { ':' });
-                        valuesList.Add(vv[0], vv.Length > 1 ? uint.Parse(vv[1]) : 0);
+                        var enumerationElementType = (EnumerationElementType)Enum.Parse(typeof(EnumerationElementType), properties["Type"]);
+                        var valuesList = new Dictionary<string, uint>();
+                        foreach (var v in properties["Values"].Split(new[] { '|' }))
+                        {
+                            var vv = v.Split(new[] { ':' });
+                            valuesList.Add(vv[0], vv.Length > 1 ? uint.Parse(vv[1]) : 0);
+                        }
+                        result.Elements = new object[] { CreateEnumElement(policyId, key, valueName, enumerationElementType, valuesList) };
+                        result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DropdownList { refId = policyId } } };
                     }
-                    result.Elements = new object[] { CreateEnumElement(policyId, key, valueName, enumerationElementType, valuesList) };
-                    result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DropdownList { refId = policyId } } };
                     break;
+
                 case "checkBox":
                     result.Elements = new object[] { CreateBooleanElement(policyId, key, valueName) };
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new CheckBox { refId = policyId, Value = properties["Label"] } } };
                     break;
+
                 case "textBox":
                     result.Elements = new object[] { CreateTextElement(policyId, key, valueName) };
                     properties.TryGetValue("Default", out defaultValue);
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new TextBox { refId = policyId, label = properties["Label"], defaultValue = defaultValue } } };
                     break;
+
                 case "decimal":
                     string minValue;
                     properties.TryGetValue("MinValue", out minValue);
@@ -311,9 +316,24 @@ namespace admxgen
                     result.Elements = new object[] { CreateDecimalElement(policyId, key, valueName, uint.Parse(minValue), uint.Parse(maxValue)) };
                     result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DecimalTextBox { refId = policyId, Value = properties["Label"], defaultValue = uint.Parse(defaultValue) } } };
                     break;
+
                 case "enabled":
                     result.Presentation = new PolicyPresentation { id = policyId };
                     break;
+
+                case "boolean":
+                    {
+                        var enumerationElementType = EnumerationElementType.Decimal;
+                        var valuesList = new Dictionary<string, uint>
+                        {
+                            { "Disabled", 0 },
+                            { "Enabled", 1 }
+                        };
+                        result.Elements = new object[] { CreateEnumElement(policyId, key, valueName, enumerationElementType, valuesList) };
+                        result.Presentation = new PolicyPresentation { id = policyId, Items = new object[] { new DropdownList { refId = policyId } } };
+                    }
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException("valueName", "Unexpected policy type");
             }
